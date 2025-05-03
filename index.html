@@ -56,57 +56,73 @@
 <body>
   <div class="container">
     <h1>Pedido de Indumentaria</h1>
- <form action="https://formsubmit.co/joelcirulli@gmail.com" method="POST">
-  <!-- Evita el captcha -->
-  <input type="hidden" name="_captcha" value="false">
-  <!-- Redirige a una página de gracias (podemos crearla juntos) -->
-  <input type="hidden" name="_next" value="https://jojoel87.github.io/pedido-indumentaria/gracias.html">
+    <form id="pedidoForm" action="https://formsubmit.co/ajax/tu-email@dominio.com" method="POST">
+      <label>Nombre del equipo</label>
+      <input type="text" name="equipo" required>
 
-  <label>Nombre del equipo</label>
-  <input type="text" name="equipo" required>
+      <label>Nombre del jugador</label>
+      <input type="text" name="jugador" required>
 
-  <label>Nombre del jugador</label>
-  <input type="text" name="jugador" required>
+      <label>Número del jugador</label>
+      <input type="text" name="numero" required>
 
-  <label>Número del jugador</label>
-  <input type="text" name="numero" required>
+      <label>Seleccioná los artículos</label>
+      <select name="articulo" multiple required>
+        <option value="Camiseta">Camiseta</option>
+        <option value="Short">Short</option>
+        <option value="Medias">Medias</option>
+        <option value="Buzo">Buzo</option>
+        <option value="Otro">Otro</option>
+      </select>
 
-  <label>Seleccioná los artículos</label>
-  <select name="articulo" multiple required>
-    <option value="Camiseta">Camiseta</option>
-    <option value="Short">Short</option>
-    <option value="Medias">Medias</option>
-    <option value="Buzo">Buzo</option>
-    <option value="Otro">Otro</option>
-  </select>
+      <label>Talle</label>
+      <select name="talle" required>
+        <option value="XS">XS</option>
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+        <option value="XXL">XXL</option>
+        <option value="Otro">Otro</option>
+      </select>
 
-  <label>Talle</label>
-  <select name="talle" required>
-    <option value="XS">XS</option>
-    <option value="S">S</option>
-    <option value="M">M</option>
-    <option value="L">L</option>
-    <option value="XL">XL</option>
-    <option value="XXL">XXL</option>
-    <option value="Otro">Otro</option>
-  </select>
+      <label>Comentarios adicionales</label>
+      <textarea name="comentarios"></textarea>
 
-  <label>Comentarios adicionales</label>
-  <textarea name="comentarios"></textarea>
-
-  <button type="submit">Enviar pedido</button>
-</form>
-
+      <button type="submit">Enviar pedido</button>
+    </form>
     <div class="message" id="mensajeConfirmacion">✅ Tu pedido fue enviado. ¡Gracias!</div>
   </div>
 
   <script>
     document.getElementById('pedidoForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      // Aquí se puede integrar con Formspree, Google Sheets, etc.
-      document.getElementById('mensajeConfirmacion').style.display = 'block';
-      this.reset();
+      e.preventDefault(); // Evitar la recarga de la página
+
+      const form = this;
+      const mensaje = document.getElementById('mensajeConfirmacion');
+      
+      // Enviar el formulario a Formsubmit (con AJAX)
+      fetch(form.action, {
+        method: form.method,
+        body: new FormData(form),
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Si el formulario se envió correctamente
+          form.reset();
+          mensaje.style.display = 'block'; // Mostrar el mensaje de éxito
+        } else {
+          // Si hubo un error en el envío
+          alert("Hubo un error al enviar el formulario, por favor intenta de nuevo.");
+        }
+      })
+      .catch(error => {
+        // Si ocurrió un error en la solicitud
+        alert("Hubo un error al enviar el formulario, por favor intenta de nuevo.");
+      });
     });
   </script>
 </body>
 </html>
+
