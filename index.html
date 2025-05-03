@@ -56,41 +56,56 @@
 <body>
   <div class="container">
     <h1>Pedido de Indumentaria</h1>
-    <form id="pedidoForm">
-      <label>Nombre del equipo</label>
-      <input type="text" name="equipo" required>
+    <form
+  action="https://formspree.io/f/meogazoq"
+  method="POST"
+>
+  <label>
+    Nombre del equipo:
+    <input type="text" name="equipo" required>
+  </label>
 
-      <label>Nombre del jugador</label>
-      <input type="text" name="jugador" required>
+  <label>
+    Nombre del jugador:
+    <input type="text" name="jugador" required>
+  </label>
 
-      <label>Número del jugador</label>
-      <input type="text" name="numero" required>
+  <label>
+    Número del jugador:
+    <input type="text" name="numero" required>
+  </label>
 
-      <label>Seleccioná los artículos</label>
-      <select name="articulo" multiple required>
-        <option value="Camiseta">Camiseta</option>
-        <option value="Short">Short</option>
-        <option value="Medias">Medias</option>
-        <option value="Buzo">Buzo</option>
-        <option value="Otro">Otro</option>
-      </select>
+  <label>
+    Seleccioná los artículos (puedes elegir más de uno):
+    <select name="articulos" multiple required>
+      <option value="Camiseta">Camiseta</option>
+      <option value="Short">Short</option>
+      <option value="Medias">Medias</option>
+      <option value="Buzo">Buzo</option>
+      <option value="Otro">Otro</option>
+    </select>
+  </label>
 
-      <label>Talle</label>
-      <select name="talle" required>
-        <option value="XS">XS</option>
-        <option value="S">S</option>
-        <option value="M">M</option>
-        <option value="L">L</option>
-        <option value="XL">XL</option>
-        <option value="XXL">XXL</option>
-        <option value="Otro">Otro</option>
-      </select>
+  <label>
+    Talle:
+    <select name="talle" required>
+      <option value="XS">XS</option>
+      <option value="S">S</option>
+      <option value="M">M</option>
+      <option value="L">L</option>
+      <option value="XL">XL</option>
+      <option value="XXL">XXL</option>
+      <option value="Otro">Otro</option>
+    </select>
+  </label>
 
-      <label>Comentarios adicionales</label>
-      <textarea name="comentarios"></textarea>
+  <label>
+    Comentarios adicionales:
+    <textarea name="comentarios"></textarea>
+  </label>
 
-      <button type="submit">Enviar pedido</button>
-    </form>
+  <button type="submit">Enviar pedido</button>
+</form>
     <div class="message" id="mensajeConfirmacion">✅ Tu pedido fue enviado. ¡Gracias!</div>
   </div>
 
